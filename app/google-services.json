@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "562835738193",
+    "project_id": "matarak-fe8c6",
+    "storage_bucket": "matarak-fe8c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562835738193:android:3d634a67da06b129b0f270",
+        "android_client_info": {
+          "package_name": "com.akih.matarak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562835738193-vlv9plvq91qdhsdv6031lnnjoibt3nji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akih.matarak",
+            "certificate_hash": "c1f6b1efbe434cd1d9e2413db9dcba645ba704f5"
+          }
+        },
+        {
+          "client_id": "562835738193-bsl0t4sfjqrscbo1pcdbrs1lsqql1h8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaJLIDe-iSUdN49yiLeWn-WtSmlONzW84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562835738193-bsl0t4sfjqrscbo1pcdbrs1lsqql1h8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
