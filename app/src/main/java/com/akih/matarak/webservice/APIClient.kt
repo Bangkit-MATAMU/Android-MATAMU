@@ -1,4 +1,4 @@
-package com.akih.matarak.webService
+package com.akih.matarak.webservice
 
 import com.akih.matarak.data.ModelArticle
 import retrofit2.Call
