@@ -1,4 +1,4 @@
-package com.akih.matarak.webService
+package com.akih.matarak.webservice
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
