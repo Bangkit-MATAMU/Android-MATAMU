@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.HospitalFragment">
 
-    <TextView
+    <fragment
+        android:id="@+id/maps"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hospital" />
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
