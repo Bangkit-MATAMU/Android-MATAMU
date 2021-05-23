@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
 import com.akih.matarak.databinding.ActivityMainBinding
@@ -23,22 +22,21 @@ class MainActivity : AppCompatActivity() {
         val historyFragment = HistoryFragment()
         val profileFragment = ProfileFragment()
         askPermissionGPS()
-        setCurrentFragment(homeFragment, "home")
+        setCurrentFragment(homeFragment)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.miHome -> setCurrentFragment(homeFragment, "home")
-                R.id.miHospital -> setCurrentFragment(hospitalFragment, "hospital")
-                R.id.miHistory -> setCurrentFragment(historyFragment, "history")
-                R.id.miProfile -> setCurrentFragment(profileFragment, "profile")
+                R.id.miHome -> setCurrentFragment(homeFragment)
+                R.id.miHospital -> setCurrentFragment(hospitalFragment)
+                R.id.miHistory -> setCurrentFragment(historyFragment)
+                R.id.miProfile -> setCurrentFragment(profileFragment)
             }
             true
         }
     }
 
-    private fun setCurrentFragment(fragment: Fragment, nama: String) =
+    private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            Log.d("coba", "setCurrentFragment: $nama")
             replace(R.id.flFragment, fragment)
             commit()
         }
