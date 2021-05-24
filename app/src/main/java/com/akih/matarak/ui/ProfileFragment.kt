@@ -22,15 +22,16 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-        auth = Firebase.auth
-        logout()
-        return binding.root
-    }
 
-    private fun logout(){
         binding.btnLogout.setOnClickListener {
             Firebase.auth.signOut()
             startActivity(Intent(binding.root.context, LoginActivity::class.java))
         }
+
+        binding.btnEditProfile.setOnClickListener {
+            startActivity(Intent(binding.root.context, EditProfileActivity::class.java))
+        }
+
+        return binding.root
     }
 }
