@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityResultBinding
+import com.akih.matarak.util.Constants
 import com.bumptech.glide.Glide
 
 class ResultActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun getMessage(title: String): CharSequence =
-        if (title == "Katarak") {
+        if (title == Constants.label[0]) {
             "Unfortunately, You are"
         } else {
           "Congratulation! You are"
