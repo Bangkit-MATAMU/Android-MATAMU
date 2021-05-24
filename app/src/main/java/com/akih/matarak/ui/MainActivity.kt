@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.akih.matarak.R
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityMainBinding
+import com.akih.matarak.util.Classifier
 import com.github.florent37.runtimepermission.kotlin.askPermission
 
 class MainActivity : AppCompatActivity() {
@@ -22,11 +23,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private val mInputSize = 224
+    private val mModelPath = "ModelFix.tflite"
+    private val mLabelPath = "label.txt"
+    private lateinit var classifier: Classifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        classifier = Classifier(assets, mModelPath, mLabelPath, mInputSize)
 
         val homeFragment = HomeFragment()
         val hospitalFragment = HospitalFragment()
@@ -56,11 +62,14 @@ class MainActivity : AppCompatActivity() {
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
+                val bitmap = data?.extras?.get("data") as Bitmap
+                val result = classifier.recognizeImage(bitmap)
+                val confidence = result[0].confidence * 100
                 val detectionResult = DetectionResult(
                     1,
-                    data?.extras?.get("data") as Bitmap,
-                    "Katarak",
-                    99
+                    bitmap,
+                    result[0].title,
+                    confidence.toInt()
                 )
 
                 val intent = Intent(this, ResultActivity::class.java)
