@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "562835738193",
-    "project_id": "matarak-fe8c6",
-    "storage_bucket": "matarak-fe8c6.appspot.com"
+    "project_number": "793927510499",
+    "project_id": "vaulted-arcana-312415",
+    "storage_bucket": "vaulted-arcana-312415.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:562835738193:android:3d634a67da06b129b0f270",
+        "mobilesdk_app_id": "1:793927510499:android:cd82cc3a0b9163b38198d6",
         "android_client_info": {
           "package_name": "com.akih.matarak"
         }
       },
       "oauth_client": [
         {
-          "client_id": "562835738193-vlv9plvq91qdhsdv6031lnnjoibt3nji.apps.googleusercontent.com",
+          "client_id": "793927510499-iniv51mr29aq95gu8m4grsgfl9ab1cjf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.akih.matarak",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "562835738193-bsl0t4sfjqrscbo1pcdbrs1lsqql1h8f.apps.googleusercontent.com",
+          "client_id": "793927510499-velnbh2olfdt8jnp2cmi5g8qfqk8nvms.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDaJLIDe-iSUdN49yiLeWn-WtSmlONzW84"
+          "current_key": "AIzaSyDG2i9lWPkbMuBNdLuWbjJCutDLLU1DWHw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "562835738193-bsl0t4sfjqrscbo1pcdbrs1lsqql1h8f.apps.googleusercontent.com",
+              "client_id": "793927510499-velnbh2olfdt8jnp2cmi5g8qfqk8nvms.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

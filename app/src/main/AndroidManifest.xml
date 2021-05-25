@@ -30,7 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Matarak"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.ResultActivity"></activity>
+        <activity android:name=".ui.ResultActivity"/>
         <activity android:name=".ui.EditProfileActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.LoginActivity">
@@ -44,7 +44,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
     </application>
 
 </manifest>
