@@ -10,6 +10,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.akih.matarak.R
 import com.akih.matarak.databinding.ActivityEditProfileBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,11 +20,13 @@ class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
     private var cal = Calendar.getInstance()
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        database = Firebase.database.reference
         setContentView(binding.root)
 
         setupDatePicker()
