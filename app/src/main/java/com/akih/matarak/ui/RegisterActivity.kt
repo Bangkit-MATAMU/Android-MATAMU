@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -31,9 +32,9 @@ class RegisterActivity : AppCompatActivity() {
             val username = binding.etUsername.text.toString()
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            val ttl = "Default"
-            val alamat = "Jakarta"
-            val gender = "Laki - Laki"
+            val ttl = "Not yet filled"
+            val alamat = "Not yet filled"
+            val gender = 0
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -59,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeNewUser(username: String, name: String, email: String, ttl: String, alamat: String, gender: String) {
+    private fun writeNewUser(username: String, name: String, email: String, ttl: String, alamat: String, gender: Int) {
         val user = User(username, name, email, ttl, alamat, gender)
         database.child("users").child(auth.currentUser?.uid.toString()).setValue(user)
     }

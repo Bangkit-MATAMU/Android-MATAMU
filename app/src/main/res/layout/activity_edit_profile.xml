@@ -7,21 +7,30 @@
     android:padding="16dp"
     tools:context=".ui.EditProfileActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/personPlaceholder"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/person_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etProfileName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
         android:drawableStart="@drawable/ic_assignment"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Name"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/personPlaceholder" />
 
     <EditText
         android:id="@+id/etProfileEmail"
@@ -33,11 +42,13 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:editable="false"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etProfileName" />
+        app:layout_constraintTop_toBottomOf="@id/etProfileName"
+        tools:ignore="Deprecated" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llBirthDate"
