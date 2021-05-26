@@ -2,6 +2,7 @@ package com.akih.matarak.data
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
+import java.util.*
 
 @IgnoreExtraProperties
 data class User(
@@ -10,7 +11,7 @@ data class User(
     val email: String,
     val ttl: String,
     val alamat: String,
-    val gender: String
+    val gender: Int
 ){
     @Exclude
     fun toMap(): Map<String, Any?> {

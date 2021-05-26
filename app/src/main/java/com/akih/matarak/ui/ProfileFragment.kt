@@ -55,7 +55,12 @@ class ProfileFragment : Fragment() {
                 tvProfileEmail.text = user.child("email").value.toString()
                 tvProfileBirthDate.text = user.child("ttl").value.toString()
                 tvProfileLocation.text = user.child("alamat").value.toString()
-                tvProfileGender.text = user.child("gender").value.toString()
+                if (user.child("gender").value.toString() == "0"){
+                    tvProfileGender.text = "Male"
+                } else {
+                    tvProfileGender.text = "Female"
+                }
+
             }
             Log.i("firebase", ""+user.value+"")
         }.addOnFailureListener{
