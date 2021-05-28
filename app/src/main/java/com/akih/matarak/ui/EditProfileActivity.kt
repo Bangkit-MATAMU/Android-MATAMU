@@ -6,13 +6,15 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
-import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.akih.matarak.R
+import com.akih.matarak.data.User
 import com.akih.matarak.databinding.ActivityEditProfileBinding
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -20,6 +22,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +34,8 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     internal lateinit var mStrageRef: StorageReference
-    private lateinit var imagePath : Uri
+    private lateinit var imagePath : String
+    private lateinit var usernameTemp: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +55,17 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {
-            val name = binding.etProfileName.text
-            val email = binding.etProfileEmail.text
-            val birthdate = binding.tvBirthDate.text
-            val location = binding.etProfileLocation.text
-            val gender = binding.spinnerGender.selectedItem as String
-            binding.personPlaceholder.setImageURI(imagePath)
+            val username = usernameTemp
+            val name = binding.etProfileName.text.toString()
+            val email = binding.etProfileEmail.text.toString()
+            val birthdate = binding.tvBirthDate.text.toString()
+            val location = binding.etProfileLocation.text.toString()
+            val gender = binding.spinnerGender.selectedItemPosition
+            val imageUrl = imagePath
 
-            Log.d("edit", "onCreate: $name $email $birthdate $location $gender")
+            writeNewUsers(username, name, imageUrl, email, birthdate, location, gender)
+
+            Log.d("edit", "onCreate: $username $name $email $birthdate $location $gender $imageUrl")
 
             onBackPressed()
         }
@@ -110,7 +118,12 @@ class EditProfileActivity : AppCompatActivity() {
     private fun loadDataEditProfile(){
         database.child("users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {user ->
             val gender = user.child("gender").value.toString()
+            usernameTemp = user.child("username").value.toString()
+            imagePath = user.child("imageUrl").value.toString()
             binding.apply {
+                Glide.with(this@EditProfileActivity)
+                        .load(user.child("imageUrl").value.toString())
+                        .into(binding.personPlaceholder)
                 etProfileName.setText(user.child("name").value.toString())
                 etProfileEmail.setText(user.child("email").value.toString())
                 tvBirthDate.text = user.child("ttl").value.toString()
@@ -124,7 +137,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun openGalleryForImage() {
-        val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         galleryIntent.type = "image/*"
         startActivityForResult(galleryIntent, 1)
     }
@@ -133,30 +146,47 @@ class EditProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             val imageUri = data!!.data
-            Log.d("KUNYUK", imageUri.toString())
             binding.personPlaceholder.setImageURI(imageUri)
             uploadImage(imageUri)
         }
     }
 
-    private fun uploadImage(imageUri: Uri?) {
-        val Ref = mStrageRef.child(System.currentTimeMillis().toString() + "." + getExtension(imageUri))
-        Ref.putFile(imageUri!!)
-                .addOnSuccessListener {
-                    imagePath = it.uploadSessionUri!!
-                    Log.d("DATA KINTIL", imagePath.toString())
-                    Toast.makeText(this@EditProfileActivity, "Image uploaded successfully", Toast.LENGTH_LONG).show()
+    private fun uploadImage(imageUri: Any?) {
+        val ref = mStrageRef.child(System.currentTimeMillis().toString())
+        val uploadTask: UploadTask = ref.putFile((imageUri as Uri?)!!)
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
                 }
-                .addOnFailureListener {
-                    // Handle unsuccessful uploads
-                    // ...
-                    Log.d("KONTOLL", it.message.toString())
-                }
+            }
+            ref.downloadUrl
+        }.addOnSuccessListener {
+            Toast.makeText(this@EditProfileActivity, "Image uploaded successfully", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener {
+            Toast.makeText(this@EditProfileActivity, "Image uploaded failed", Toast.LENGTH_LONG).show()
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                imagePath = task.result.toString()
+                Toast.makeText(this@EditProfileActivity, "Image uploaded done", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
-    private fun getExtension(uri: Uri?): String? {
-        val cr = contentResolver
-        val mimeTypeMap = MimeTypeMap.getSingleton()
-        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri!!))
+    private fun writeNewUsers(username: String, name: String,imageUrl: String, email: String, ttl: String, alamat: String, gender: Int) {
+        val key = database.child("users").push().key
+        if (key == null) {
+            Log.w("TAG", "Couldn't get push key for posts")
+            return
+        }
+
+        val post = User(username, name, imageUrl, email, ttl, alamat, gender)
+        val postValues = post.toMap()
+
+        val childUpdates = hashMapOf<String, Any>(
+                "/users/${auth.currentUser?.uid}/" to postValues
+        )
+
+        database.updateChildren(childUpdates)
     }
 }

@@ -34,12 +34,13 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.etPassword.text.toString()
             val ttl = "Not yet filled"
             val alamat = "Not yet filled"
+            val imageUrl = "https://firebasestorage.googleapis.com/v0/b/vaulted-arcana-312415.appspot.com/o/users%2Fperson_placeholder.png?alt=media&token=af0c3fc5-e0ee-4e03-8f6b-c7d059148211"
             val gender = 0
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        writeNewUser(username, name, email, ttl, alamat, gender)
+                        writeNewUser(username, name, imageUrl, email, ttl, alamat, gender)
                         Log.d("TAG Sukses", "createUserWithEmail:success")
                         Toast.makeText(this, "Authentication success.",
                             Toast.LENGTH_SHORT).show()
@@ -60,8 +61,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeNewUser(username: String, name: String, email: String, ttl: String, alamat: String, gender: Int) {
-        val user = User(username, name, email, ttl, alamat, gender)
+    private fun writeNewUser(username: String, name: String,imageUrl: String, email: String, ttl: String, alamat: String, gender: Int) {
+        val user = User(username, name, imageUrl,email, ttl, alamat, gender)
         database.child("users").child(auth.currentUser?.uid.toString()).setValue(user)
     }
 }
