@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.akih.matarak.R
 import com.akih.matarak.data.User
 import com.akih.matarak.databinding.FragmentProfileBinding
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -51,6 +52,9 @@ class ProfileFragment : Fragment() {
     private fun loadDataProfile(){
         database.child("users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {user ->
             binding.apply {
+                Glide.with(requireActivity())
+                        .load(user.child("imageUrl").value.toString())
+                        .into(personPlaceholder)
                 tvProfileName.text = user.child("name").value.toString()
                 tvProfileEmail.text = user.child("email").value.toString()
                 tvProfileBirthDate.text = user.child("ttl").value.toString()
