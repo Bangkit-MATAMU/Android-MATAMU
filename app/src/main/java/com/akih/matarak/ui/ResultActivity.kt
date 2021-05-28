@@ -17,6 +17,7 @@ class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
+        const val SHOULD_SAVE = "save"
     }
 
     private lateinit var binding: ActivityResultBinding
@@ -34,9 +35,12 @@ class ResultActivity : AppCompatActivity() {
         val extras = intent.extras
         extras?.let {
             val result = extras.getParcelable<DetectionResult>(EXTRA_DATA)
+            val shouldSave = extras.getBoolean(SHOULD_SAVE)
             if (result != null) {
                 populateItem(result)
-                saveResultToDatabase(result)
+                if (shouldSave) {
+                    saveResultToDatabase(result)
+                }
             }
         }
     }
