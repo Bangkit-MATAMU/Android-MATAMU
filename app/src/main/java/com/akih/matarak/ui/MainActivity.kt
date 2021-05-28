@@ -1,19 +1,30 @@
 package com.akih.matarak.ui
 
 import android.Manifest
+import android.R.attr
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityMainBinding
 import com.akih.matarak.util.Classifier
+import com.akih.matarak.util.Utils.getCurrentDateTime
+import com.akih.matarak.util.Utils.toString
 import com.github.florent37.runtimepermission.kotlin.askPermission
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import java.io.ByteArrayOutputStream
+import kotlin.math.log
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,12 +38,14 @@ class MainActivity : AppCompatActivity() {
     private val mModelPath = "ModelFix.tflite"
     private val mLabelPath = "label.txt"
     private lateinit var classifier: Classifier
+    private lateinit var mStorageRef: StorageReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         classifier = Classifier(assets, mModelPath, mLabelPath, mInputSize)
+        mStorageRef = FirebaseStorage.getInstance().getReference("histories")
 
         val homeFragment = HomeFragment()
         val hospitalFragment = HospitalFragment()
@@ -64,19 +77,44 @@ class MainActivity : AppCompatActivity() {
             if (requestCode == CAMERA_REQUEST_CODE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
                 val result = classifier.recognizeImage(bitmap)
-                val confidence = result[0].confidence * 100
-                val detectionResult = DetectionResult(
-                    1,
-                    bitmap,
-                    result[0].title,
-                    confidence.toInt()
-                )
-
-                val intent = Intent(this, ResultActivity::class.java)
-                intent.putExtra(ResultActivity.EXTRA_DATA, detectionResult)
-                startActivity(intent)
+                uploadImage(bitmap, result)
             }
         }
+    }
+
+    private fun uploadImage(bitmap: Bitmap, result: List<Classifier.Recognition>) {
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data: ByteArray = baos.toByteArray()
+        val ref = mStorageRef.child(System.currentTimeMillis().toString())
+        val uploadTask: UploadTask = ref.putBytes(data)
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                goToResultActivity(task.result.toString(), result)
+            }
+        }
+    }
+
+    private fun goToResultActivity(downloadUri: String, result: List<Classifier.Recognition>) {
+        val confidence = result[0].confidence * 100
+        val detectionResult = DetectionResult(
+            1,
+            downloadUri,
+            result[0].title,
+            getCurrentDateTime().toString("yyyyMMdd-HH:mm:ss"),
+            confidence.toInt()
+        )
+
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra(ResultActivity.EXTRA_DATA, detectionResult)
+        startActivity(intent)
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
@@ -92,7 +130,7 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.CAMERA
         ){
 
-        }.onDeclined{e ->
+        }.onDeclined{ e ->
             if (e.hasDenied()){
                 e.denied.forEach{
 
@@ -100,10 +138,10 @@ class MainActivity : AppCompatActivity() {
 
                 AlertDialog.Builder(this)
                     .setMessage("Please Accept Our Permission")
-                    .setPositiveButton("Yes"){_,_ ->
+                    .setPositiveButton("Yes"){ _, _ ->
                         e.askAgain()
                     }
-                    .setNegativeButton("No"){dialog, _ ->
+                    .setNegativeButton("No"){ dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()
