@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     private fun goToResultActivity(downloadUri: String, result: List<Classifier.Recognition>) {
         val confidence = result[0].confidence * 100
         val detectionResult = DetectionResult(
-            1,
+            "",
             downloadUri,
             result[0].title,
             getCurrentDateTime().toString("yyyyMMdd-HH:mm:ss"),
@@ -114,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra(ResultActivity.EXTRA_DATA, detectionResult)
+        intent.putExtra(ResultActivity.SHOULD_SAVE, true)
         startActivity(intent)
     }
 

@@ -1,4 +1,4 @@
-package com.akih.matarak.viewModel
+package com.akih.matarak.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
