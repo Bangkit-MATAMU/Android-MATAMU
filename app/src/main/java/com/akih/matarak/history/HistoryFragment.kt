@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akih.matarak.databinding.FragmentHistoryBinding
-import com.akih.matarak.home.ArticleViewModel
 import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Resource
 
