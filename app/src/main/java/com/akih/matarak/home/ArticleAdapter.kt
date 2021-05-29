@@ -2,26 +2,61 @@ package com.akih.matarak.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.akih.matarak.data.ModelArticle
+import com.akih.matarak.data.Article
 import com.akih.matarak.databinding.ItemListArticleBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-class ArticleAdapter(private val article: List<ModelArticle>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>(){
-    inner class ArticleViewHolder(val binding: ItemListArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
+    inner class ArticleViewHolder(val binding: ItemListArticleBinding): RecyclerView.ViewHolder(binding.root)
+
+    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(oldItem: Article, newItem: Article) =
+                oldItem.thumbnail == newItem.thumbnail
+
+        override fun areContentsTheSame(oldArticle: Article, newArticle: Article) =
+                oldArticle == newArticle
     }
+
+    val differ = AsyncListDiffer(this, differCallback)
+    private var onItemClickListener: ((Article) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder(ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val itemBinding = ItemListArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ArticleViewHolder(itemBinding)
     }
 
-    override fun getItemCount(): Int = article.size
-
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        holder.binding.apply {
-            tvTitle.text = article[position].title
-            tvContent.text = article[position].content
-        }
+        val article = differ.currentList[position]
 
+        holder.binding.tvTitle.text = truncateString(article.title, 25)
+        holder.binding.tvContent.text = truncateString(article.content, 80)
+        Glide.with(holder.itemView.context)
+                .load(article.thumbnail)
+                .apply(RequestOptions().override(160,120))
+                .into(holder.binding.ivThumbnail)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(article) }
+        }
+    }
+
+    override fun getItemCount() = differ.currentList.size
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
+
+    private fun truncateString(string: String?, maxSize: Int): String? {
+        if (string != null) {
+            if (string.length < maxSize) return string
+            return string.take(maxSize) + "..."
+        } else {
+            return null
+        }
     }
 }
