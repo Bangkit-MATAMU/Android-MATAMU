@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
     private fun loadDataProfile(){
         database.child("users").child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {user ->
             binding.apply {
-                Glide.with(requireActivity())
+                Glide.with(binding.root.context)
                         .load(user.child("imageUrl").value.toString())
                         .into(personPlaceholder)
                 tvProfileName.text = user.child("name").value.toString()

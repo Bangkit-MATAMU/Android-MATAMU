@@ -10,23 +10,16 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.akih.matarak.R
 import com.akih.matarak.databinding.FragmentHomeBinding
 import com.akih.matarak.detailarticle.DetailArticleActivity
-import com.akih.matarak.history.HistoryAdapter
-import com.akih.matarak.hospital.MapsViewModel
-import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Resource
-import com.akih.matarak.viewmodel.ViewModelProviderFactory
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var articleAdapter: ArticleAdapter
-    private lateinit var viewModel: ArticleViewModel
+    private lateinit var bannerAdapter: BannerAdapter
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,16 +33,37 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this,
-            ViewModelProvider.NewInstanceFactory())[ArticleViewModel::class.java]
+            ViewModelProvider.NewInstanceFactory())[HomeViewModel::class.java]
 
         setupRecyclerView()
         viewModel.getArticles()
+        viewModel.getBanners()
         viewModel.data.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
                     hideErrorMessage()
                     articleAdapter.differ.submitList(response.data)
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { message ->
+                        Toast.makeText(binding.root.context, "An error occured: $message", Toast.LENGTH_LONG).show()
+                        showErrorMessage(message)
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
+
+        viewModel.banner.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    hideErrorMessage()
+                    bannerAdapter.differ.submitList(response.data)
                 }
                 is Resource.Error -> {
                     hideProgressBar()
@@ -85,9 +99,16 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         articleAdapter = ArticleAdapter()
+        bannerAdapter = BannerAdapter()
+
         with(binding.rvArtivle) {
             layoutManager = LinearLayoutManager(context)
             adapter = articleAdapter
+        }
+
+        with(binding.rvBanner) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = bannerAdapter
         }
 
         articleAdapter.setOnItemClickListener {
