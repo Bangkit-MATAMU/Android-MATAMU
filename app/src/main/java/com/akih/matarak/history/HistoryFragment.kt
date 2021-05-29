@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akih.matarak.databinding.FragmentHistoryBinding
+import com.akih.matarak.home.ArticleViewModel
 import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Resource
 
@@ -28,18 +31,47 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = HistoryViewModel()
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.NewInstanceFactory())[HistoryViewModel::class.java]
         setupRecyclerView()
 
         viewModel.getHistoriesData()
         viewModel.data.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
+                    hideProgressBar()
+                    hideErrorMessage()
                     historyAdapter.differ.submitList(response.data)
                 }
-                // perlu tambahkan resource loading dan error
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { message ->
+                        Toast.makeText(binding.root.context, "An error occured: $message", Toast.LENGTH_LONG).show()
+                        showErrorMessage(message)
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
             }
         })
+    }
+
+    private fun showErrorMessage(message: String) {
+        binding.error.cvError.visibility = View.VISIBLE
+        binding.error.tvErrorMessage.text = message
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideErrorMessage() {
+        binding.error.cvError.visibility = View.INVISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.INVISIBLE
     }
 
     private fun setupRecyclerView() {
