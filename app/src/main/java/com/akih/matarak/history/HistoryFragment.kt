@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.akih.matarak.databinding.FragmentHistoryBinding
 import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Resource

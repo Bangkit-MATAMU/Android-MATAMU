@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityResultBinding
-import com.akih.matarak.util.Constants
+import com.akih.matarak.util.CATARACT
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -61,7 +61,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun getMessage(title: String): CharSequence =
-        if (title == Constants.label[0]) {
+        if (title == CATARACT) {
             "Unfortunately, You are"
         } else {
           "Congratulation! You are"
