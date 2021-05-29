@@ -1,16 +1,14 @@
-package com.akih.matarak.util
+package com.akih.matarak.history
 
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.akih.matarak.adapter.HistoryAdapter
-import com.akih.matarak.viewmodel.HistoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ItemTouchHelperCallback(
-    private val adapter: HistoryAdapter,
-    private val view: View,
-    private val viewModel: HistoryViewModel
+        private val adapter: HistoryAdapter,
+        private val view: View,
+        private val viewModel: HistoryViewModel
 ) : ItemTouchHelper.SimpleCallback(
     ItemTouchHelper.UP or ItemTouchHelper.DOWN,
     ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {

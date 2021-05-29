@@ -1,11 +1,10 @@
-package com.akih.matarak.adapter
+package com.akih.matarak.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.akih.matarak.data.ModelArticle
 import com.akih.matarak.databinding.ItemListArticleBinding
-import com.bumptech.glide.Glide
 
 class ArticleAdapter(private val article: List<ModelArticle>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>(){
     inner class ArticleViewHolder(val binding: ItemListArticleBinding) : RecyclerView.ViewHolder(binding.root) {

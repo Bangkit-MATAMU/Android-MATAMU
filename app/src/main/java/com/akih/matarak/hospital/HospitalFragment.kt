@@ -1,4 +1,4 @@
-package com.akih.matarak.ui
+package com.akih.matarak.hospital
 
 import android.Manifest
 import android.annotation.SuppressLint

@@ -1,21 +1,22 @@
-package com.akih.matarak.ui
+package com.akih.matarak.main
 
 import android.Manifest
-import android.R.attr
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityMainBinding
-import com.akih.matarak.util.Classifier
+import com.akih.matarak.history.HistoryFragment
+import com.akih.matarak.home.HomeFragment
+import com.akih.matarak.hospital.HospitalFragment
+import com.akih.matarak.profile.ProfileFragment
+import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Utils.getCurrentDateTime
 import com.akih.matarak.util.Utils.toString
 import com.github.florent37.runtimepermission.kotlin.askPermission
@@ -23,7 +24,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {

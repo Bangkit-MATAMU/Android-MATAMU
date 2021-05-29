@@ -1,4 +1,4 @@
-package com.akih.matarak.ui
+package com.akih.matarak.profile
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -23,7 +23,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 

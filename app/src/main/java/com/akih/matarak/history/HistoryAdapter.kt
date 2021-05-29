@@ -1,4 +1,4 @@
-package com.akih.matarak.adapter
+package com.akih.matarak.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
