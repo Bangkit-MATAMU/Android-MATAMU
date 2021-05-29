@@ -1,8 +1,7 @@
-package com.akih.matarak.ui
+package com.akih.matarak.result
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityResultBinding
 import com.akih.matarak.util.Constants

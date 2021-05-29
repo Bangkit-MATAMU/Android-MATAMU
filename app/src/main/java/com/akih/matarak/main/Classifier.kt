@@ -1,4 +1,4 @@
-package com.akih.matarak.util
+package com.akih.matarak.main
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap
@@ -86,7 +86,7 @@ class Classifier(assetManager: AssetManager, modelPath: String, labelPath: Strin
         return byteBuffer
     }
 
-    private fun getSortedResult(labelProbArray: Array<FloatArray>): List<Classifier.Recognition> {
+    private fun getSortedResult(labelProbArray: Array<FloatArray>): List<Recognition> {
         Log.d("Classifier", "List Size:(%d, %d, %d)".format(labelProbArray.size,labelProbArray[0].size,lableList.size))
 
         val pq = PriorityQueue(
@@ -99,7 +99,7 @@ class Classifier(assetManager: AssetManager, modelPath: String, labelPath: Strin
         for (i in lableList.indices) {
             val confidence = labelProbArray[0][i]
             if (confidence >= THRESHOLD) {
-                pq.add(Classifier.Recognition("" + i,
+                pq.add(Recognition("" + i,
                     if (lableList.size > i) lableList[i] else "Unknown", confidence)
                 )
             }

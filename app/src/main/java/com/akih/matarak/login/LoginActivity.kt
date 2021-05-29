@@ -1,4 +1,4 @@
-package com.akih.matarak.ui
+package com.akih.matarak.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.akih.matarak.databinding.ActivityLoginBinding
+import com.akih.matarak.register.RegisterActivity
+import com.akih.matarak.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

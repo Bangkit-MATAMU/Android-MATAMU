@@ -1,4 +1,4 @@
-package com.akih.matarak.ui
+package com.akih.matarak.home
 
 import android.content.Intent
 import android.os.Bundle

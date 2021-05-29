@@ -32,17 +32,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Matarak"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.ResultActivity"/>
-        <activity android:name=".ui.EditProfileActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".result.ResultActivity"/>
+        <activity android:name=".profile.EditProfileActivity" />
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".main.MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
