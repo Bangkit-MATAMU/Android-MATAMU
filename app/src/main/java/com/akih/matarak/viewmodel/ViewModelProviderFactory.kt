@@ -2,6 +2,7 @@ package com.akih.matarak.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.akih.matarak.hospital.MapsViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelProviderFactory : ViewModelProvider.Factory {

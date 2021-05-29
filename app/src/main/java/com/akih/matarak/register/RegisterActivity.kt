@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.akih.matarak.data.User
 import com.akih.matarak.databinding.ActivityRegisterBinding
 import com.akih.matarak.login.LoginActivity
+import com.akih.matarak.util.DEFAULT_IMAGE
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -32,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.etPassword.text.toString()
             val ttl = "Not yet filled"
             val alamat = "Not yet filled"
-            val imageUrl = "https://firebasestorage.googleapis.com/v0/b/vaulted-arcana-312415.appspot.com/o/users%2Fperson_placeholder.png?alt=media&token=af0c3fc5-e0ee-4e03-8f6b-c7d059148211"
+            val imageUrl = DEFAULT_IMAGE
             val gender = 0
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
