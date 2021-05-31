@@ -1,5 +1,7 @@
 package com.akih.matarak.home
 
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -32,9 +34,13 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
-
+        val content = truncateString(article.content, 80)
         holder.binding.tvTitle.text = truncateString(article.title, 25)
-        holder.binding.tvContent.text = truncateString(article.content, 80)
+        holder.binding.tvContent.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                                Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT)
+                                        } else {
+                                                Html.fromHtml(content)
+                                        }
         Glide.with(holder.itemView.context)
                 .load(article.thumbnail)
                 .apply(RequestOptions().override(160,120))

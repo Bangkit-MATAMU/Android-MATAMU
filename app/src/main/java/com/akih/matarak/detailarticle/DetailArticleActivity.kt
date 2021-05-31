@@ -1,7 +1,9 @@
 package com.akih.matarak.detailarticle
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.MenuItem
 import com.akih.matarak.R
 import com.akih.matarak.data.Article
@@ -38,7 +40,11 @@ class DetailArticleActivity : AppCompatActivity() {
     private fun populateItem(result: Article) {
         with (binding) {
             tvDetailTitle.text = result.title
-            tvDetailContent.text = result.content
+            tvDetailContent.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(result.content, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                Html.fromHtml(result.content)
+            }
             tvDetailSource.text = result.source
             Glide.with(this@DetailArticleActivity)
                 .load(result.thumbnail)
