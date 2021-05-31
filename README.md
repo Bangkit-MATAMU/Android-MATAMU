@@ -16,10 +16,11 @@ This aplication build with a few technology, whice is :
  - [`Firebase`](https://firebase.google.com/)
 
 ## Features
+A few features, which is:
  - Login and Registration with Firebase Authentication
  - Show an article about cataract
  - Show nearby hospital
- - Detaction cataract with Tensorflow lite
+ - Detection cataract disease
  - Show recently history cataract detection
  - Upload image and edit profile
  

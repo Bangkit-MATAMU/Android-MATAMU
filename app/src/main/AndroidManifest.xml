@@ -31,7 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Matarak"
         tools:ignore="AllowBackup">
-        <activity android:name=".detailarticle.DetailArticleActivity"></activity>
+        <activity android:name=".detailarticle.DetailArticleActivity"/>
         <activity android:name=".result.ResultActivity" />
         <activity android:name=".profile.EditProfileActivity" />
         <activity android:name=".register.RegisterActivity" />
