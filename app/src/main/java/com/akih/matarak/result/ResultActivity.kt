@@ -1,9 +1,14 @@
 package com.akih.matarak.result
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.akih.matarak.R
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityResultBinding
+import com.akih.matarak.hospital.HospitalFragment
+import com.akih.matarak.main.MainActivity
 import com.akih.matarak.util.CATARACT
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -41,6 +46,11 @@ class ResultActivity : AppCompatActivity() {
                     saveResultToDatabase(result)
                 }
             }
+        }
+
+        binding.btnGoesToHospital.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 

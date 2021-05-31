@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
@@ -26,7 +27,7 @@ import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SetFragmentChange {
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1
@@ -79,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                 val result = classifier.recognizeImage(bitmap)
                 uploadImage(bitmap, result)
             }
+        }else if(resultCode == Activity.RESULT_OK && requestCode == 666){
+            Toast.makeText(applicationContext, "pindah", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -156,4 +159,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun changeFragmentTo(fragment: Fragment) {
+        setCurrentFragment(fragment)
+    }
+
+
 }
