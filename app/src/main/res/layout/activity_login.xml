@@ -7,17 +7,12 @@
     tools:context=".login.LoginActivity"
     android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tvMatarak"
+    <ImageView
+        android:id="@+id/ivMatarak"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/matarak"
-        android:textColor="@color/matarak"
-        android:textSize="36sp"
-        android:textStyle="bold"
+        android:layout_height="100dp"
+        android:src="@drawable/logotextmatarak"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +26,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMatarak" />
+        app:layout_constraintTop_toBottomOf="@+id/ivMatarak" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -87,7 +82,6 @@
         android:id="@+id/BtnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="180dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/custom_button"
         android:text="@string/Login"
@@ -96,32 +90,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <TextView
         android:id="@+id/tvRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="78dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginStart="58dp"
         android:text="@string/belum_punya_akun"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
 
     <TextView
         android:id="@+id/btnRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="40dp"
         android:text="@string/registration"
         android:textColor="@color/matarak"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvRegis" />
+        app:layout_constraintStart_toEndOf="@+id/tvRegis"
+        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
