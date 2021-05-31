@@ -94,6 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvAdvice" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGoesToHospital"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:insetTop="0dp"
