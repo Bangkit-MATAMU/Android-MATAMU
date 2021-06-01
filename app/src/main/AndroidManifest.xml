@@ -30,6 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Matarak"
+        tools:replace="android:theme"
         tools:ignore="AllowBackup">
         <activity android:name=".detailarticle.DetailArticleActivity"/>
         <activity android:name=".result.ResultActivity" />
@@ -43,6 +44,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity" />
+        <activity android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

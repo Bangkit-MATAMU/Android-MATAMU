@@ -5,8 +5,10 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -20,17 +22,20 @@ import com.akih.matarak.profile.ProfileFragment
 import com.akih.matarak.result.ResultActivity
 import com.akih.matarak.util.Utils.getCurrentDateTime
 import com.akih.matarak.util.Utils.toString
+import com.canhub.cropper.CropImage
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
 import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class MainActivity : AppCompatActivity(), SetFragmentChange {
 
     companion object {
-        private const val CAMERA_PERMISSION_CODE = 1
         private const val CAMERA_REQUEST_CODE = 2
     }
 
@@ -66,8 +71,7 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
         }
 
         binding.fab.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            Pix.start(this@MainActivity, Options.init().setRequestCode(CAMERA_REQUEST_CODE))
         }
     }
 
@@ -76,9 +80,17 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
-                val bitmap = data?.extras?.get("data") as Bitmap
-                val result = classifier.recognizeImage(bitmap)
-                uploadImage(bitmap, result)
+                val returnValue: ArrayList<String> = data?.getStringArrayListExtra(Pix.IMAGE_RESULTS) as ArrayList<String>
+                CropImage.activity(Uri.fromFile(File(returnValue[0])))
+                    .start(this)
+            } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                val result = CropImage.getActivityResult(data)
+                if (result != null) {
+                    val file = File(result.getUriFilePath(this@MainActivity)!!)
+                    val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                    val detectionResult = classifier.recognizeImage(bitmap)
+                    uploadImage(bitmap, detectionResult)
+                }
             }
         }else if(resultCode == Activity.RESULT_OK && requestCode == 666){
             Toast.makeText(applicationContext, "pindah", Toast.LENGTH_SHORT).show()
