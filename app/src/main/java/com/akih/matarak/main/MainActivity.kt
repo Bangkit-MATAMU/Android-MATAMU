@@ -8,28 +8,20 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
-import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityMainBinding
 import com.akih.matarak.history.HistoryFragment
 import com.akih.matarak.home.HomeFragment
 import com.akih.matarak.hospital.HospitalFragment
 import com.akih.matarak.profile.ProfileFragment
 import com.akih.matarak.result.ResultActivity
-import com.akih.matarak.util.Utils.getCurrentDateTime
-import com.akih.matarak.util.Utils.toString
 import com.canhub.cropper.CropImage
 import com.fxn.pix.Options
 import com.fxn.pix.Pix
 import com.github.florent37.runtimepermission.kotlin.askPermission
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -40,18 +32,11 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
     }
 
     private lateinit var binding: ActivityMainBinding
-    private val mInputSize = 224
-    private val mModelPath = "ModelFix.tflite"
-    private val mLabelPath = "label.txt"
-    private lateinit var classifier: Classifier
-    private lateinit var mStorageRef: StorageReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        classifier = Classifier(assets, mModelPath, mLabelPath, mInputSize)
-        mStorageRef = FirebaseStorage.getInstance().getReference("histories")
 
         val homeFragment = HomeFragment()
         val hospitalFragment = HospitalFragment()
@@ -71,7 +56,10 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
         }
 
         binding.fab.setOnClickListener {
-            Pix.start(this@MainActivity, Options.init().setRequestCode(CAMERA_REQUEST_CODE))
+            Pix.start(this@MainActivity,
+                Options.init()
+                    .setRequestCode(CAMERA_REQUEST_CODE)
+                    .setMode(Options.Mode.Picture))
         }
     }
 
@@ -88,8 +76,7 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
                 if (result != null) {
                     val file = File(result.getUriFilePath(this@MainActivity)!!)
                     val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                    val detectionResult = classifier.recognizeImage(bitmap)
-                    uploadImage(bitmap, detectionResult)
+                    goToResultActivity(bitmap)
                 }
             }
         }else if(resultCode == Activity.RESULT_OK && requestCode == 666){
@@ -97,39 +84,9 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
         }
     }
 
-    private fun uploadImage(bitmap: Bitmap, result: List<Classifier.Recognition>) {
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data: ByteArray = baos.toByteArray()
-        val ref = mStorageRef.child(System.currentTimeMillis().toString())
-        val uploadTask: UploadTask = ref.putBytes(data)
-        uploadTask.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
-                }
-            }
-            ref.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                goToResultActivity(task.result.toString(), result)
-            }
-        }
-    }
-
-    private fun goToResultActivity(downloadUri: String, result: List<Classifier.Recognition>) {
-        val confidence = result[0].confidence * 100
-        val detectionResult = DetectionResult(
-            "",
-            downloadUri,
-            result[0].title,
-            getCurrentDateTime().toString("yyyyMMdd-HH:mm:ss"),
-            confidence.toInt()
-        )
-
+    private fun goToResultActivity(bitmap: Bitmap) {
         val intent = Intent(this, ResultActivity::class.java)
-        intent.putExtra(ResultActivity.EXTRA_DATA, detectionResult)
-        intent.putExtra(ResultActivity.SHOULD_SAVE, true)
+        intent.putExtra(ResultActivity.BITMAP_DATA, bitmap)
         startActivity(intent)
     }
 

@@ -18,7 +18,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/image_detail_article" />
 
         <TextView
             android:id="@+id/tvDetailTitle"
@@ -26,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
-            android:text="Title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="?android:attr/textColorPrimary"
@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
-            android:text="Title"
             android:textSize="14sp"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/tvDetailTitle"
@@ -52,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
-            android:text="Title"
             android:textSize="12sp"
             android:textStyle="italic"
             android:textColor="?android:attr/textColorHint"

@@ -23,7 +23,7 @@
         android:layout_marginStart="20dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text="20210528-15:01:00"
+        android:text="@string/_20210528_15_01_00"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/imgHistory"/>
 
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="99%" />
+            android:text="@string/ninetynine" />
 
         <TextView
             android:id="@+id/tvHistoryTitle"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="18sp"
-            android:text="Cataract" />
+            android:text="@string/cataract" />
 
     </LinearLayout>
 

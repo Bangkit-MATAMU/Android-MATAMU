@@ -21,6 +21,30 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open_camera">open camera</string>
     <string name="image_from_history">image from history</string>
+    <string name="image_detail_article">image detail article</string>
+    <string name="name">Name</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="opendatepicker">openDatePicker</string>
+    <string name="location">Location</string>
+    <string name="save">Save</string>
+    <string name="matarak_logo">matarak logo</string>
+    <string name="image_selected">image selected</string>
+    <string name="unfortunately_you_are">Unfortunately, You are</string>
+    <string name="_99">99</string>
+    <string name="percent">%</string>
+    <string name="for_further_action_you_can_check_with_the_hospital">For further action you can check with the hospital</string>
+    <string name="click_here_to_find_the_nearest_hospital">Click here to find the nearest hospital</string>
+    <string name="nama_orang">Nama Orang</string>
+    <string name="anongtf26_gmail_com">anongtf26@gmail.com</string>
+    <string name="_26_february_2002">26 February 2002</string>
+    <string name="serang_petarukan_pemalang">Serang, Petarukan, Pemalang</string>
+    <string name="male">Male</string>
+    <string name="logout">Logout</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="_20210528_15_01_00">20210528–15:01:00</string>
+    <string name="ninetynine">99%</string>
+    <string name="cataract">Cataract</string>
+    <string name="thumbnail">thumbnail</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>

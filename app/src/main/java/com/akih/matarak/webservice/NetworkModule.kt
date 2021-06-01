@@ -1,6 +1,6 @@
 package com.akih.matarak.webservice
 
-import com.akih.maps.model.NearbyPlaceResponse
+import com.akih.matarak.data.NearbyPlaceResponse
 import com.akih.matarak.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Call

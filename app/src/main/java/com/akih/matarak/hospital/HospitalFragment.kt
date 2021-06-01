@@ -13,11 +13,9 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.akih.maps.model.NearbyPlaceResponse
+import com.akih.matarak.data.NearbyPlaceResponse
 import com.akih.matarak.R
 import com.akih.matarak.databinding.FragmentHospitalBinding
-import com.akih.matarak.hospital.MapsFragmentState
-import com.akih.matarak.hospital.MapsViewModel
 import com.akih.matarak.viewmodel.ViewModelProviderFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices

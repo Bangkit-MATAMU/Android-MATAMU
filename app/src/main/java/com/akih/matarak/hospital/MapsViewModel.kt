@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.akih.maps.model.NearbyPlaceResponse
+import com.akih.matarak.data.NearbyPlaceResponse
 import com.akih.matarak.webservice.NetworkModule
 import retrofit2.Call
 import retrofit2.Callback
