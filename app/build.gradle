@@ -70,8 +70,10 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
     implementation "org.jetbrains.anko:anko-commons:0.10.0"
 
-    // http
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_version"
+
+    implementation  'com.fxn769:pix:1.5.6'
+    implementation 'com.github.CanHub:Android-Image-Cropper:3.1.1'
 }

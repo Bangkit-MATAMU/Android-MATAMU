@@ -34,9 +34,9 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.DetectionResultViewHo
 
     override fun onBindViewHolder(holder: DetectionResultViewHolder, position: Int) {
         val history = differ.currentList[position]
-
+        val confidence = "${history.confidence} %"
         holder.binding.tvHistoryTime.text = history.time
-        holder.binding.tvHistoryConfidence.text = history.confidence.toString()
+        holder.binding.tvHistoryConfidence.text = confidence
         holder.binding.tvHistoryTitle.text = history.title
         Glide.with(holder.itemView.context)
             .load(history.imageUrl)
