@@ -35,7 +35,7 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         val content = truncateString(article.content, 80)
-        holder.binding.tvTitle.text = truncateString(article.title, 25)
+        holder.binding.tvTitle.text = truncateString(article.title, 30)
         holder.binding.tvContent.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                                 Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT)
                                         } else {
