@@ -93,7 +93,6 @@ class HistoryFragment : Fragment() {
         historyAdapter.setOnItemClickListener {
             val intent = Intent(binding.root.context, ResultActivity::class.java)
             intent.putExtra(ResultActivity.EXTRA_DATA, it)
-            intent.putExtra(ResultActivity.SHOULD_SAVE, false)
             startActivityForResult(intent, 666)
 //            binding.root.context.startActivity(intent)
         }

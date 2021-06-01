@@ -108,5 +108,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCTA"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="?android:colorBackground"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
