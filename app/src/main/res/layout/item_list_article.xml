@@ -20,7 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/matarak"/>
+            android:src="@drawable/matarak"
+            android:contentDescription="@string/thumbnail" />
 
         <TextView
             android:id="@+id/tvTitle"

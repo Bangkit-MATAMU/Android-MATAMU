@@ -5,11 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
-import com.akih.matarak.R
 import com.akih.matarak.data.Article
-import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityDetailArticleBinding
-import com.akih.matarak.result.ResultActivity
 import com.bumptech.glide.Glide
 
 class DetailArticleActivity : AppCompatActivity() {

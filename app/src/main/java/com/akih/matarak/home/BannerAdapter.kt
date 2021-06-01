@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.akih.matarak.data.Article
 import com.akih.matarak.databinding.ItemBannerBinding
-import com.akih.matarak.databinding.ItemListArticleBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 

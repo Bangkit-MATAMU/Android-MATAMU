@@ -2,7 +2,6 @@ package com.akih.matarak.data
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
-import java.util.*
 
 @IgnoreExtraProperties
 data class User(

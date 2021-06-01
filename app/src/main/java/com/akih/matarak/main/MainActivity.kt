@@ -8,28 +8,20 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.akih.matarak.R
-import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityMainBinding
 import com.akih.matarak.history.HistoryFragment
 import com.akih.matarak.home.HomeFragment
 import com.akih.matarak.hospital.HospitalFragment
 import com.akih.matarak.profile.ProfileFragment
 import com.akih.matarak.result.ResultActivity
-import com.akih.matarak.util.Utils.getCurrentDateTime
-import com.akih.matarak.util.Utils.toString
 import com.canhub.cropper.CropImage
 import com.fxn.pix.Options
 import com.fxn.pix.Pix
 import com.github.florent37.runtimepermission.kotlin.askPermission
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import java.io.ByteArrayOutputStream
 import java.io.File
 
 

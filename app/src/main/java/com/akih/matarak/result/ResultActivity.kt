@@ -1,19 +1,13 @@
 package com.akih.matarak.result
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.akih.matarak.R
 import com.akih.matarak.data.DetectionResult
 import com.akih.matarak.databinding.ActivityResultBinding
-import com.akih.matarak.hospital.HospitalFragment
 import com.akih.matarak.main.Classifier
-import com.akih.matarak.main.MainActivity
 import com.akih.matarak.util.CATARACT
 import com.akih.matarak.util.Utils
 import com.akih.matarak.util.Utils.toString
@@ -32,7 +26,6 @@ class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
-        const val SHOULD_SAVE = "save"
         const val BITMAP_DATA = "bitmap"
     }
 
@@ -95,15 +88,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun showOnProgressState() {
-//        binding.progressBar.visibility = View.VISIBLE
-//        binding.btnGoesToHospital.visibility = View.INVISIBLE
-//        binding.imgInput.visibility = View.INVISIBLE
-//        binding.tvAdvice.visibility = View.INVISIBLE
-//        binding.tvCTA.visibility = View.INVISIBLE
-//        binding.tvConfidence.visibility = View.INVISIBLE
-//        binding.tvMessage.visibility = View.INVISIBLE
-//        binding.tvPercent.visibility = View.INVISIBLE
-//        binding.tvResult.visibility = View.INVISIBLE
         binding.cvProgress.visibility = View.VISIBLE
     }
 
@@ -123,15 +107,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun hideOnProgressState() {
-//        binding.progressBar.visibility = View.INVISIBLE
-//        binding.btnGoesToHospital.visibility = View.VISIBLE
-//        binding.imgInput.visibility = View.VISIBLE
-//        binding.tvAdvice.visibility = View.VISIBLE
-//        binding.tvCTA.visibility = View.VISIBLE
-//        binding.tvConfidence.visibility = View.VISIBLE
-//        binding.tvMessage.visibility = View.VISIBLE
-//        binding.tvPercent.visibility = View.VISIBLE
-//        binding.tvResult.visibility = View.VISIBLE
         binding.cvProgress.visibility = View.INVISIBLE
     }
 

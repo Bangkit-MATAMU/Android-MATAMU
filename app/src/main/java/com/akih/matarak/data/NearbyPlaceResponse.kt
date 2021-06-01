@@ -1,4 +1,4 @@
-package com.akih.maps.model
+package com.akih.matarak.data
 
 import com.google.gson.annotations.SerializedName
 
