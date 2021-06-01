@@ -30,22 +30,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Matarak"
-        tools:replace="android:theme"
-        tools:ignore="AllowBackup">
-        <activity android:name=".detailarticle.DetailArticleActivity"/>
-        <activity android:name=".result.ResultActivity" />
-        <activity android:name=".profile.EditProfileActivity" />
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".login.LoginActivity">
+        tools:ignore="AllowBackup"
+        tools:replace="android:theme">
+        <activity android:name=".splash.SplashActivity"
+            android:theme="@style/splashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".detailarticle.DetailArticleActivity" />
+        <activity android:name=".result.ResultActivity" />
+        <activity android:name=".profile.EditProfileActivity" />
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".login.LoginActivity"/>
         <activity android:name=".main.MainActivity" />
-        <activity android:name="com.canhub.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
