@@ -25,3 +25,18 @@ A few features, which is:
  - Upload image and edit profile
  
  ## ScreenShoot
+![SS1](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/1.jpg "Splash Screen")
+![SS2](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/Screenshot_20210602-110852_Matarak.jpg "Login")
+![SS3](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/Screenshot_20210602-110858_Matarak.jpg "Registration")
+![SS4](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/2.jpg "Article")
+![SS5](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/3.jpg "Article Detail")
+![SS6](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/4.jpg "Hospital")
+![SS7](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/5.jpg "History")
+![SS8](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/6.jpg "Profile")
+![SS9](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/7.jpg "Edit Profile")
+![SS10](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/8.jpg "Capture Image")
+![SS11](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/9.jpg "Crop Image")
+![SS12](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/10.jpg "Result")
+
+LICENSE
+Distributed under the MIT License. See [`LICENSE`](https://github.com/Bangkit-MATAMU/Android-MATAMU/blob/main/LICENSE) for more information.
