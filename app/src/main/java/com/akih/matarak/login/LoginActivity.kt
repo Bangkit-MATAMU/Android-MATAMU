@@ -35,6 +35,11 @@ class LoginActivity : AppCompatActivity() {
         binding.BtnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
+            if (email.isBlank() || password.isBlank()) {
+                Toast.makeText(this@LoginActivity, "Email and Password should be filled",
+                    Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

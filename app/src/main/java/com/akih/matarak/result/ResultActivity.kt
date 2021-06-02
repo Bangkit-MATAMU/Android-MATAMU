@@ -2,6 +2,7 @@ package com.akih.matarak.result
 
 import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ import com.akih.matarak.util.CATARACT
 import com.akih.matarak.util.Utils
 import com.akih.matarak.util.Utils.toString
 import com.bumptech.glide.Glide
+import com.canhub.cropper.CropImage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -21,16 +23,17 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
-        const val BITMAP_DATA = "bitmap"
+        const val IMAGE_DATA = "image_data"
     }
 
     private val mInputSize = 224
-    private val mModelPath = "ModelFix.tflite"
+    private val mModelPath = "ModelMatarakNew.tflite"
     private val mLabelPath = "label.txt"
     private lateinit var classifier: Classifier
     private lateinit var binding: ActivityResultBinding
@@ -51,12 +54,12 @@ class ResultActivity : AppCompatActivity() {
         val extras = intent.extras
         extras?.let {
             val result = extras.getParcelable<DetectionResult>(EXTRA_DATA)
-            val bitmap = extras.getParcelable<Bitmap>(BITMAP_DATA)
+            val imageResult = extras.getParcelable<CropImage.ActivityResult>(IMAGE_DATA)
             if (result != null) {
                 populateItem(result)
             }
-            if (bitmap != null) {
-                uploadImage(bitmap)
+            if (imageResult != null) {
+                uploadImage(imageResult)
             }
         }
 
@@ -66,8 +69,10 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(bitmap: Bitmap) {
+    private fun uploadImage(imageResult: CropImage.ActivityResult) {
         showOnProgressState()
+        val file = File(imageResult.getUriFilePath(this@ResultActivity)!!)
+        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data: ByteArray = baos.toByteArray()

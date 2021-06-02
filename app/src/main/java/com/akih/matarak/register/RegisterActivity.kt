@@ -35,6 +35,11 @@ class RegisterActivity : AppCompatActivity() {
             val alamat = "Not yet filled"
             val imageUrl = DEFAULT_IMAGE
             val gender = 0
+            if (email.isBlank() || password.isBlank()) {
+                Toast.makeText(this@RegisterActivity, "Email and Password should be filled",
+                    Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

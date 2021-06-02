@@ -4,8 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -74,9 +72,9 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 val result = CropImage.getActivityResult(data)
                 if (result != null) {
-                    val file = File(result.getUriFilePath(this@MainActivity)!!)
-                    val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                    goToResultActivity(bitmap)
+//                    val file = File(result.getUriFilePath(this@MainActivity)!!)
+//                    val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                    goToResultActivity(result)
                 }
             }
         }else if(resultCode == Activity.RESULT_OK && requestCode == 666){
@@ -84,9 +82,9 @@ class MainActivity : AppCompatActivity(), SetFragmentChange {
         }
     }
 
-    private fun goToResultActivity(bitmap: Bitmap) {
+    private fun goToResultActivity(imageResult:  CropImage.ActivityResult) {
         val intent = Intent(this, ResultActivity::class.java)
-        intent.putExtra(ResultActivity.BITMAP_DATA, bitmap)
+        intent.putExtra(ResultActivity.IMAGE_DATA, imageResult)
         startActivity(intent)
     }
 
