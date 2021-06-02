@@ -32,7 +32,6 @@ class BannerAdapter: RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
         val banner = differ.currentList[position]
         Glide.with(holder.itemView.context)
             .load(banner)
-            .apply(RequestOptions().override(320,180))
             .into(holder.binding.imgBanner)
     }
 
