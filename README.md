@@ -23,6 +23,15 @@ A few features, which is:
  - Detection cataract disease
  - Show recently history cataract detection
  - Upload image and edit profile
+
+## CREATOR
+ 1. [`A1231614 - Faqih Zada Ikhsan`](https://www.linkedin.com/in/faqihzada)
+ 2. [`A1231599 - Galih Tegar Febrianto`](https://www.linkedin.com/in/galih-tegar-febrianto/?originalSubdomain=id)
+ 3. [`C0131309 - Citra Winarni Siahaan`](https://www.linkedin.com/in/citrawinarnis/)
+ 4. [`C0141318 - Lino Verlin`](https://www.linkedin.com/in/lino-verlin-51a61b1a4/)
+ 5. [`M1231596 - Novaren Veraldo`](https://id.linkedin.com/in/novarenv)
+ 6. [`M1231597 - A. Fauzi Makarim`](https://www.linkedin.com/in/fauzi-makarim/)
+
  
  ## ScreenShoot
 ![SS1](https://raw.githubusercontent.com/faqihakih/assetMatarak/main/Matarak/1.jpg "Splash Screen")
